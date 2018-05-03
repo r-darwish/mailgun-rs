@@ -1,6 +1,6 @@
 use std::borrow::Cow;
 use super::domain::Domain;
-use reqwest::Result;
+use super::errors::*;
 
 #[derive(Serialize, Builder)]
 pub struct Message<'a> {
@@ -29,8 +29,7 @@ pub struct Message<'a> {
 
 impl<'a> Message<'a> {
     pub fn send(self) -> Result<()> {
-        let mut response = self.domain.post().form(&self).send()?;
-        println!("{} - {}", response.status(), response.text().unwrap());
+        self.domain.post().form(&self).send()?.result()?;
         Ok(())
     }
 }
