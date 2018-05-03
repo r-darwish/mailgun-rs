@@ -12,3 +12,6 @@ mod domain;
 mod errors;
 
 pub use client::Client;
+pub use domain::Domain;
+pub use messages::{Message, MessageBuilder};
+pub use errors::{Error, ErrorKind};
