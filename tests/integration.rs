@@ -9,9 +9,12 @@ fn send_message() {
     let domain = client.domain(env::var("MAILGUN_DOMAIN").unwrap());
     domain
         .message()
-        .from("Someone <someone@somedomain.com")
+        .from("Someone <someone@somedomain.com>")
         .to(env::var("MAILGUN_TO").unwrap())
         .subject("Testing Message")
+        .text("Hi")
+        .build()
+        .unwrap()
         .send()
         .unwrap();
 }

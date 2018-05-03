@@ -16,7 +16,9 @@ impl<'a> Domain<'a> {
     }
 
     pub fn message<'b: 'a>(&'b self) -> MessageBuilder<'a> {
-        MessageBuilder::new(&self)
+        let mut builder = MessageBuilder::default();
+        builder.domain(&self);
+        builder
     }
 
     pub(crate) fn post(&self) -> RequestBuilder {
